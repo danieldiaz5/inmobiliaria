@@ -19,7 +19,6 @@ if st.session_state["authenticated"]:
 else:
     authenticate.button_login()
     
-# if (st.session_state["authenticated"]  and "Underwriters" in st.session_state["user_cognito_groups"]):
 if (st.session_state["authenticated"]):
 
     # image_path = "data/illustration.png"

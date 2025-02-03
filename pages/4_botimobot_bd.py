@@ -14,7 +14,6 @@ st.set_page_config(
 
 
 
-# url_img = "http://gseii.org/site/wp-content/uploads/2014/05/wallpaper-628119.jpg"
 ## PARA LA IMAGEN DE FONDO        
 st.markdown("""
     <style>
@@ -61,7 +60,6 @@ if st.session_state["authenticated"]:
 else:
     authenticate.button_login()
     
-# if (st.session_state["authenticated"]  and "Underwriters" in st.session_state["user_cognito_groups"]):
 if (st.session_state["authenticated"]):
 
     

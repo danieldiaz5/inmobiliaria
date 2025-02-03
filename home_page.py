@@ -15,17 +15,6 @@ st.set_page_config(
 
 
 
-## PARA LA IMAGEN DE FONDO  
-# st.markdown("""
-#     <style>
-#     .stApp {
-#         background-image: url("http://gseii.org/site/wp-content/uploads/2014/05/wallpaper-628119.jpg");
-#         background-size: cover;
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 ## PARA LA IMAGEN DE FONDO        
 st.markdown(
 """
@@ -62,15 +51,7 @@ st.markdown(
 """
 )
 
-# st.image('data/inteligencia-artificial.png',use_container_width=False)
-# logo_html = f"""
-# <div style="display: flex; align-items: center;">
-#     <img src="app/static/inteligencia-artificial.png" alt="logo" width=300 height=215>
-#     </a>
-#     <span style="font-size: 8px; font-weight: bold; color:black;"></span>
-# </div>
-# """
-# st.markdown(logo_html,unsafe_allow_html=True)
+
 col1, col2, col3 = st.columns(3)
 
 img_path_2 = Path("static/inteligencia-artificial.png")
@@ -98,13 +79,10 @@ powered_by = """ <div style="position: fixed;
                 target="_blank">[Epsilon Data]</a> 
                 </div> """ 
 
-# Agregar el HTML a la aplicación 
 st.markdown(powered_by, unsafe_allow_html=True)
 
-# Check authentication when user lands on the home page.
 authenticate.set_st_state_vars()
 
-# Add login/logout buttons
 if st.session_state["authenticated"]:
     authenticate.button_logout()    
 else:

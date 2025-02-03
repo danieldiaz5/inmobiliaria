@@ -1,13 +1,14 @@
-from config.conexionDb import conn
-import streamlit as st
 import pandas as pd
 import numpy as np
-from pathlib import Path
-from PIL import Image
 import os
 import json
 import requests
+import streamlit as st
 import components.authenticate as authenticate
+from config.conexionDb import conn
+from pathlib import Path
+from PIL import Image
+
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -44,7 +45,7 @@ else:
 
     
 if (st.session_state["authenticated"]  
-# and "Underwriters" in st.session_state["user_cognito_groups"]
+
     ):
     # Ruta a tu imagen de fondo
     img_path = Path("data/data.jpg")
@@ -53,11 +54,6 @@ if (st.session_state["authenticated"]
 
 
     col1, col2, col3 = st.columns(3)
-    # with col2:
-    #     if image_path.is_file():
-    #         st.image(image_path.as_posix(), caption='Casa', use_container_width=True)
-    #     else:
-    #         st.write("El archivo de imagen no se encontró.")
     
     img_path_1 = Path("data/people.png")
     image_path_1 = Path(img_path_1)

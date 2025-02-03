@@ -1,21 +1,12 @@
 import pandas as pd
-
-from langchain_aws import ChatBedrock
-# from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
-# from langchain.agents.agent_types import AgentType
-
-
-from dataclasses import dataclass
-from typing import Literal
 import streamlit as st
-
-from langchain import OpenAI
-# from langchain.callbacks import get_openai_callback
-from langchain_community.callbacks.manager import get_openai_callback
-from langchain.chains import ConversationChain
-from langchain.chains.conversation.memory import ConversationSummaryMemory
 import streamlit.components.v1 as components
-# from langchain_core.runnables.history import RunnableWithMessageHistory
+from typing import Literal
+from dataclasses import dataclass
+from langchain_aws import ChatBedrock
+from langchain.chains import ConversationChain
+from langchain_community.callbacks.manager import get_openai_callback
+from langchain.chains.conversation.memory import ConversationSummaryMemory
 
 @dataclass
 class Message:
@@ -45,11 +36,6 @@ def initialize_session_state():
     
     if "conversation" not in st.session_state:
         
-        # llm = OpenAI(
-        #     temperature=0,
-        #     openai_api_key=st.secrets["openai_api_key"],
-        #     model_name="text-davinci-003"
-        # )
         llm = ChatBedrock(
             model_id="anthropic.claude-3-sonnet-20240229-v1:0",
             model_kwargs=dict(temperature=0),
@@ -58,7 +44,6 @@ def initialize_session_state():
             region_name='us-east-1'
         )
 
-        # RunnableWithMessageHistory()
         st.session_state.conversation = ConversationChain(
             llm=llm,
             memory=ConversationSummaryMemory(llm=llm),
@@ -99,7 +84,8 @@ with chat_placeholder:
     for chat in st.session_state.history:
         div = f"""
             <div class="chat-row {'' if chat.origin == 'ai' else 'row-reverse'}">
-                <img class="chat-icon" src="app/static/{'asistente-de-ai.png' if chat.origin == 'ai' else 'usuario.png'}" width=32 height=32>
+                <img class="chat-icon" src="app/static/{'asistente-de-ai.png' 
+                if chat.origin == 'ai' else 'usuario.png'}" width=32 height=32>
                 <div class="chat-bubble {'ai-bubble' if chat.origin == 'ai' else 'human-bubble'}">
                     &#8203;{chat.message}
                 </div>
@@ -166,59 +152,4 @@ streamlitDoc.addEventListener('keydown', function(e) {
     width=0,
 )
 
-#!
 
-
-# PATH_PROCESSED = './data/processed/'
-# data = pd.read_excel(PATH_PROCESSED + 'inmoDataProcessed.xlsx')
-
-
-# llm = ChatBedrock(
-#             model_id="anthropic.claude-3-sonnet-20240229-v1:0",
-#             model_kwargs=dict(temperature=0),
-#             aws_access_key_id=st.secrets['aws_access_key_id'],
-#             aws_secret_access_key=st.secrets['aws_secret_access_key'],
-#             region_name='us-east-1'
-#         )
-
-# llm.invoke(input="Cuál es la capital de Ecuador?")
-
-# messages = [
-#     (
-#         "system",
-#         "Eres un asesor inmobiliario que responde en español",
-#     ),
-#     ("human", "Cuál es la capital de Ecuador?"),
-# ]
-# ai_msg = llm.invoke(messages)
-# ai_msg
-
-# agent = create_pandas_dataframe_agent(
-#     llm=llm,
-#     df=data,
-#     verbose=False,
-#     allow_dangerous_code=True,
-#     agent_executor_kwargs={'handle_parsing_errors': True}
-# )
-
-
-# messages = [
-#     (
-#         "system",
-#         "Eres un asesor inmobiliario que habla en español",
-#     ),
-#     ("human", "Cuántas filas y columnas existen?"),
-# ]
-# ai_msg = agent.invoke(messages)
-# ai_msg.get('output')
-
-
-# messages = [
-#     (
-#         "system",
-#         "Eres un asesor inmobiliario que responde en español",
-#     ),
-#     ("human", "Puedes decirme cuántos TIPOS existen y cuáles son?"),
-# ]
-# ai_msg = agent.invoke(messages)
-# print(ai_msg.get('output'))
